@@ -3,6 +3,6 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.getenv('PROJECT_NAME') + '.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 application = get_asgi_application()
 

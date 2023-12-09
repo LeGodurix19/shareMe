@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from app.views import index, login_view, desc_view, links_view, general_view, create_view, logout_view, delete_link
+from .views import index, login_view, desc_view, links_view, general_view, create_view, logout_view, delete_link
 from dotenv import load_dotenv
 import os
 
