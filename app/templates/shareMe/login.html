@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'shareMe/css/style.css' %}">
+
+</head>
+<body class="login">
+    <h1>Login Page</h1>
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    
+    <form method="POST" action="{% url 'login' %}" class="form_1">
+        {% csrf_token %}
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">
+            <p>Login</p>
+        </button>
+    </form>
+    <br>
+    <button>
+        <a href="{% url 'create_user' %}">Register</a>
+    </button>
+</body>
+</html>
+
+

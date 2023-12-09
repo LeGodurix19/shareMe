@@ -1,0 +1,51 @@
+{% extends "shareMe/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" class="form_1">
+            <details>
+                <summary>Nouveau lien</summary>
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div>
+                    <button class="btn btn-3" type="submit">
+                        <p>Valider &rarr;</p>
+                    </button>
+                </div>
+            </details>
+        </form>
+        <div class="all_links">
+            <h2>My links: </h2>
+            {% for link in links %}
+                {% if link.is_public %}
+                    <div class="link">
+                {% else %}
+                    <div class="link" style="background-color=#f7f7f7">
+                {% endif %}
+                        <div onclick="start_form('{{ link.link.name }}', '{{ link.url }}')">
+                            <img src="/{{ link.link.logo }}" alt="logo link">
+                            <div>{{ link.link.name }}</div>
+                            <form method="post" action="{% url 'delete_link' link.link.name %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">
+                                    <img src="{% static 'shareMe/imgs/delete.svg' %}" alt="delete">
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+<script>
+    function start_form(name, url) {
+        (document.getElementsByTagName('details'))[0].open = true;
+        for (let i = 0; i < document.getElementById('id_link').length; i++)
+            if (document.getElementById('id_link').options[i].textContent == name)
+                document.getElementById('id_link').options[i].selected = true;
+        document.getElementById('id_url').value = url;
+    }
+</script>
+{% endblock script %}

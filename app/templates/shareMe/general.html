@@ -1,0 +1,23 @@
+{% extends "shareMe/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="description">
+            <!--<img src="/{{ user.avatar }}" alt="avatar">-->
+            <img src="/{{ user.avatar }}" alt="avatar">
+            <h2>{{ user.username }}</h2>
+            <p>{{ user.bio }}</p>
+        </div>
+        <div class="all_links">
+            <h2>My links: </h2>
+            {% for link in links %}
+                <div class="link">
+                    <div>
+                        <img src="/{{ link.link.logo }}" alt="logo link">
+                        <a href="{{ link.url }}">{{ link.link.name }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

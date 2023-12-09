@@ -1,0 +1,19 @@
+{% extends "shareMe/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <form method="post" enctype="multipart/form-data" class="form_1">
+            <h2>Description</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="id_password" name="password">
+            <div>
+                <button class="btn btn-3" type="submit">
+                    <p>Valider &rarr;</p>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
