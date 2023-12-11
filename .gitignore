@@ -2,5 +2,4 @@
 data/
 __pycache__/
 logos/
-/static/
 .DS_Store
