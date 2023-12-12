@@ -6,9 +6,11 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_DB: ${DB_NAME}  # Use the DB_NAME as the initial database name
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_HOST: ${DB_HOST}
+      POSTGRES_PORT: ${DB_PORT}
     ports:
       - "${DB_PORT}:5432"
 
@@ -17,7 +19,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "sleep 10 && python manage.py migrate && python manage.py createsuperuserwithpassword --username ${ADMIN_USR} --password ${ADMIN_PWD} --email ${ADMIN_MAIL} --preserve && python manage.py runserver 0.0.0.0:8000"
+
     volumes:
       - .:/code
     ports:
